@@ -6,6 +6,7 @@ import HomePage from './components/HomePage'
 function App() {
   
   const [currentAccount, setCurrentAccount] = useState(null)
+
   
   // check if Ethereum Provider API is injected by Metamask
   const isMetaMaskInstalled = () => {
@@ -42,10 +43,11 @@ function App() {
         const accounts = await ethereum.request({
           method: 'eth_accounts'
         })
-        if(currentAccount.length > 0) {
+        if(accounts.length > 0) {
           setCurrentAccount(accounts[0])
+        }else{
+          setCurrentAccount(null)
         }
-        console.log(accounts)
       } catch (error) {
           setCurrentAccount(null)  
       }
@@ -63,11 +65,21 @@ function App() {
       }
     }
 
+    function handleChainChanged() {
+      window.location.reload()
+    }
+
+    // listeon on chain changed
+    ethereum.on('chainChanged', handleChainChanged)
+
+
     //listen on account changed
     ethereum.on('accountsChanged', handleAccountsChanged)
 
     return () => {
-      ethereum.removeListener('accountsChanged', handleAccountsChanged)
+        ethereum.removeListener('chainChanged', handleChainChanged)
+        ethereum.removeListener('accountsChanged', handleAccountsChanged)
+
     }
 
   }, [currentAccount])
