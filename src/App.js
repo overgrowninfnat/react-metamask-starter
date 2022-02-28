@@ -1,10 +1,10 @@
 import React from 'react'
 
+import AuthPage from './components/AuthPage'
+
 function App() {
   return (
-    <div>
-      <p>React Metamask Starter Template</p>
-    </div>
+    <AuthPage />
    ) 
 }
 
