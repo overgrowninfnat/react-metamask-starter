@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import AuthPage from './components/AuthPage'
-import HomePage from './components/HomePage'
+import AuthPage from "./components/AuthPage";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
     <>
-      {/* <AuthPage /> */}
+      <AuthPage />
       <HomePage />
     </>
-   ) 
+  );
 }
 
 export default App;
